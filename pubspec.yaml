@@ -30,22 +30,18 @@ flutter:
   assets:
     - assets/images/coronavirus.png
     - assets/images/syringe.png
-    - assets/images/blue.png
-    - assets/images/green.png
-    - assets/images/pink.png
-    - assets/images/purple.png
     - assets/images/profile.jpeg
     - assets/images/medicine.png
 
-  fonts:
-    - family: SourceSansPro
-      fonts:
-        - asset: assets/fonts/NunitoSans-Bold.ttf
-        - asset: assets/fonts/NunitoSans-SemiBold.ttf
-        - asset: assets/fonts/NunitoSans-Black.ttf
-        - asset: assets/fonts/NunitoSans-Light.ttf
-        - asset: assets/fonts/NunitoSans-Regular.ttf
-          # style: italic
+  # fonts:
+  #   - family: SourceSansPro
+  #     fonts:
+  #       - asset: assets/fonts/NunitoSans-Bold.ttf
+  #       - asset: assets/fonts/NunitoSans-SemiBold.ttf
+  #       - asset: assets/fonts/NunitoSans-Black.ttf
+  #       - asset: assets/fonts/NunitoSans-Light.ttf
+  #       - asset: assets/fonts/NunitoSans-Regular.ttf
+  # style: italic
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
