@@ -17,7 +17,7 @@ class VaccineListHeader extends StatelessWidget {
             blurRadius: 15,
             offset: Offset(0, 3), // changes position of shadow
           ),
-        ], borderRadius: BorderRadius.circular(15), color: MyColors.hotBlue),
+        ], borderRadius: BorderRadius.circular(15), color: MyColors.hotGreen),
         child: Padding(
             padding: const EdgeInsets.all(20),
             child: Column(children: [
@@ -27,7 +27,7 @@ class VaccineListHeader extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Vaccines data',
+                          'Vaccines Data',
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,

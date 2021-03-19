@@ -13,9 +13,9 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   curved_navigation_bar: ^0.3.7
-  #  url_launcher: ^6.0.2
   http: ^0.13.0
   intl: ^0.17.0
+  font_awesome_flutter: ^9.0.0
 
 dev_dependencies:
   flutter_test:
@@ -30,11 +30,12 @@ flutter:
   assets:
     - assets/images/coronavirus.png
     - assets/images/syringe.png
-    - assets/images/syringe1.png
     - assets/images/blue.png
+    - assets/images/green.png
     - assets/images/pink.png
     - assets/images/purple.png
     - assets/images/profile.jpeg
+    - assets/images/medicine.png
 
   fonts:
     - family: SourceSansPro

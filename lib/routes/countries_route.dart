@@ -29,7 +29,7 @@ class CountriesRoute extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.fromLTRB(5, 40, 20, 10),
                             child: Text(
-                              'Latest update by country',
+                              'Latest Update By Country',
                               style: TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.bold),
                             ),

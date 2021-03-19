@@ -29,7 +29,7 @@ class VaccineRoute extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.fromLTRB(5, 40, 20, 10),
                             child: Text(
-                              'Latest vaccine updates',
+                              'Latest Vaccine Updates',
                               style: TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.bold),
                             ),

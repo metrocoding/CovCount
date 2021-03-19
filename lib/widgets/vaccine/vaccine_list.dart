@@ -1,5 +1,6 @@
 import 'package:covid_count/models/vaccine.dart';
 import 'package:covid_count/resource/colors.dart';
+import 'package:covid_count/routes/vaccine_detail_route.dart';
 import 'package:flutter/material.dart';
 
 class VaccineList extends StatelessWidget {
@@ -26,7 +27,14 @@ class VaccineList extends StatelessWidget {
                       color: Colors.transparent,
                       child: InkWell(
                           borderRadius: BorderRadius.circular(15),
-                          onTap: () => {},
+                          onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => VaccineDetail(
+                                    vaccine: vaccines[index],
+                                  ),
+                                ),
+                              ),
                           child: Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 5, vertical: 7),
@@ -55,7 +63,7 @@ class VaccineList extends StatelessWidget {
                                                       BorderRadius.circular(5),
                                                   image: DecorationImage(
                                                       image: AssetImage(
-                                                          'assets/images/syringe1.png')))),
+                                                          'assets/images/syringe.png')))),
                                           Padding(
                                               padding: const EdgeInsets.only(
                                                   left: 10),
@@ -103,7 +111,7 @@ class VaccineList extends StatelessWidget {
                                                           fontWeight:
                                                               FontWeight.w700,
                                                           color: MyColors
-                                                              .hotBlue)),
+                                                              .hotGreen)),
                                                 ),
                                               ]),
                                         ),
@@ -121,7 +129,7 @@ class VaccineList extends StatelessWidget {
                                                 style: TextStyle(
                                                     fontSize: 14,
                                                     fontWeight: FontWeight.w700,
-                                                    color: MyColors.hotBlue)),
+                                                    color: MyColors.hotGreen)),
                                           ]),
                                         )
                                       ])))))),

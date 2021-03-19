@@ -1,5 +1,6 @@
 import 'package:covid_count/resource/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AboutUsRoute extends StatelessWidget {
   @override
@@ -33,13 +34,10 @@ class AboutUsRoute extends StatelessWidget {
               children: [
                 TextButton.icon(
                     onPressed: () {},
-                    icon: Icon(
-                      Icons.link,
-                      size: 30,
-                      color: MyColors.hotPurple,
-                    ),
+                    icon: FaIcon(FontAwesomeIcons.linkedinIn,
+                        size: 20, color: MyColors.hotPurple),
                     label: Text(
-                      'Linkedin: arminknot',
+                      'arminknot',
                       style: TextStyle(color: MyColors.hotPurple, fontSize: 16),
                     )),
               ],
@@ -52,13 +50,10 @@ class AboutUsRoute extends StatelessWidget {
               children: [
                 TextButton.icon(
                     onPressed: () {},
-                    icon: Icon(
-                      Icons.link,
-                      size: 30,
-                      color: MyColors.hotPurple,
-                    ),
+                    icon: FaIcon(FontAwesomeIcons.instagram,
+                        size: 20, color: MyColors.hotPurple),
                     label: Text(
-                      'Instagram: secretsofcode',
+                      'secretsofcode',
                       style: TextStyle(color: MyColors.hotPurple, fontSize: 16),
                     ))
               ],

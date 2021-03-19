@@ -2,16 +2,19 @@ import 'dart:convert';
 
 import 'package:covid_count/enum/ConnectionStatus.dart';
 import 'package:covid_count/models/country.dart';
+import 'package:covid_count/models/therapeutic.dart';
 import 'package:covid_count/models/vaccine.dart';
 import 'package:covid_count/models/world.dart';
 import 'package:covid_count/resource/colors.dart';
 import 'package:covid_count/routes/about_us_route.dart';
 import 'package:covid_count/routes/countries_route.dart';
+import 'package:covid_count/routes/therapeutic_route.dart';
 import 'package:covid_count/routes/vaccine_route.dart';
 import 'package:covid_count/widgets/connection_error.dart';
 import 'package:covid_count/widgets/waiting.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
@@ -27,10 +30,11 @@ class _HomePageState extends State<HomePage> {
     _getData();
   }
 
-  int _selectedIndex = 1;
+  int _selectedIndex = 2;
   ConnectionStatus _connectionStatus = ConnectionStatus.Error;
   List<Country> _countryList = [];
   List<Vaccine> _vaccineList = [];
+  List<Therapeutic> _therapeuticList = [];
   World _world;
 
   List<Widget> _pages = <Widget>[
@@ -39,8 +43,6 @@ class _HomePageState extends State<HomePage> {
     AboutUsRoute()
   ];
 
-  List<Color> _colors = <Color>[Colors.red, Colors.blueAccent, Colors.green];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,19 +50,27 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: MyColors.background,
         items: <Widget>[
-          Icon(Icons.local_hospital_outlined,
+          FaIcon(FontAwesomeIcons.syringe,
               size: 30,
               color: _selectedIndex != 0
                   ? MyColors.iconDisable
-                  : MyColors.hotBlue),
-          Icon(Icons.coronavirus_outlined,
+                  : MyColors.hotGreen),
+          Padding(
+            padding: const EdgeInsets.all(3),
+            child: FaIcon(FontAwesomeIcons.prescriptionBottleAlt,
+                size: 28,
+                color: _selectedIndex != 1
+                    ? MyColors.iconDisable
+                    : MyColors.hotBlue),
+          ),
+          FaIcon(FontAwesomeIcons.virus,
               size: 30,
-              color: _selectedIndex != 1 ? MyColors.iconDisable : Colors.pink),
-          Icon(Icons.info_outline,
+              color: _selectedIndex != 2 ? MyColors.iconDisable : Colors.pink),
+          FaIcon(FontAwesomeIcons.infoCircle,
               size: 30,
-              color: _selectedIndex != 2
+              color: _selectedIndex != 3
                   ? MyColors.iconDisable
-                  : MyColors.hotPurple),
+                  : MyColors.hotPurple)
         ],
         onTap: (index) {
           setState(() {
@@ -101,16 +111,20 @@ class _HomePageState extends State<HomePage> {
           await http.get(Uri.https('disease.sh', 'v3/covid-19/vaccine'));
       Response responseWorld =
           await http.get(Uri.https('disease.sh', 'v3/covid-19/all'));
+      Response responseTherapeutic =
+          await http.get(Uri.https('disease.sh', 'v3/covid-19/therapeutics'));
 
       if (responseCountry.statusCode != 200 ||
           responseVaccine.statusCode != 200 ||
-          responseWorld.statusCode != 200) {
+          responseWorld.statusCode != 200 ||
+          responseTherapeutic.statusCode != 200) {
         setState(() {
           _connectionStatus = ConnectionStatus.Error;
         });
       } else {
         var iterableCountries = json.decode(responseCountry.body);
         var iterableVaccines = json.decode(responseVaccine.body);
+        var iterableTherapeutics = json.decode(responseTherapeutic.body);
         _world = World.fromJson(json.decode(responseWorld.body));
 
         setState(() {
@@ -121,8 +135,12 @@ class _HomePageState extends State<HomePage> {
           _vaccineList = List<Vaccine>.from(
               iterableVaccines['data'].map((model) => Vaccine.fromJson(model)));
 
+          _therapeuticList = List<Therapeutic>.from(iterableTherapeutics['data']
+              .map((model) => Therapeutic.fromJson(model)));
+
           _pages = <Widget>[
             VaccineRoute(_vaccineList, _getData),
+            TherapeuticRoute(_therapeuticList, _getData),
             CountriesRoute(_countryList, _world, _getData),
             AboutUsRoute()
           ];
