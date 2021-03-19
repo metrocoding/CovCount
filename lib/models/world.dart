@@ -1,11 +1,16 @@
+import 'package:covid_count/utility/util.dart';
+
 class World {
-  int cases;
-  int deaths;
-  int recovered;
+  String cases;
+  String deaths;
+  String recovered;
 
   World(this.cases, this.deaths, this.recovered);
 
   factory World.fromJson(Map<String, dynamic> json) {
-    return World(json['cases'], json['deaths'], json['recovered']);
+    return World(
+        Util.toNumericFormat(json['cases'].toString()),
+        Util.toNumericFormat(json['deaths'].toString()),
+        Util.toNumericFormat(json['recovered'].toString()));
   }
 }

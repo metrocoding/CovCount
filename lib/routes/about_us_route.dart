@@ -1,6 +1,5 @@
 import 'package:covid_count/resource/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AboutUsRoute extends StatelessWidget {
   @override
@@ -8,36 +7,42 @@ class AboutUsRoute extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height - 90,
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/images/purple.png'),
-              fit: BoxFit.contain,
-              alignment: Alignment.topCenter),
-          color: MyColors.background),
+      decoration: BoxDecoration(color: MyColors.background),
       child: Column(
         // mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 80),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(900),
-              child: Image(
-                image: AssetImage('assets/images/profile.jpeg'),
-                width: MediaQuery.of(context).size.width / 2,
+            child: Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(150),
+                  color: MyColors.hotPurple),
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(900),
+                  child: Image(
+                    image: AssetImage('assets/images/profile.jpeg'),
+                    width: MediaQuery.of(context).size.width / 3,
+                  ),
+                ),
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(10, 50, 10, 0),
+            padding: const EdgeInsets.fromLTRB(10, 30, 10, 0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 TextButton.icon(
                     onPressed: () {},
-                    icon: FaIcon(FontAwesomeIcons.linkedinIn,
-                        size: 20, color: MyColors.hotPurple),
+                    icon: Icon(
+                      Icons.link,
+                      size: 30,
+                      color: MyColors.hotPurple,
+                    ),
                     label: Text(
-                      'arminknot',
+                      'Linkedin: arminknot',
                       style: TextStyle(color: MyColors.hotPurple, fontSize: 16),
                     )),
               ],
@@ -50,10 +55,13 @@ class AboutUsRoute extends StatelessWidget {
               children: [
                 TextButton.icon(
                     onPressed: () {},
-                    icon: FaIcon(FontAwesomeIcons.instagram,
-                        size: 20, color: MyColors.hotPurple),
+                    icon: Icon(
+                      Icons.link,
+                      size: 30,
+                      color: MyColors.hotPurple,
+                    ),
                     label: Text(
-                      'secretsofcode',
+                      'Instagram: secretsofcode',
                       style: TextStyle(color: MyColors.hotPurple, fontSize: 16),
                     ))
               ],

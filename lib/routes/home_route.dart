@@ -55,14 +55,11 @@ class _HomePageState extends State<HomePage> {
               color: _selectedIndex != 0
                   ? MyColors.iconDisable
                   : MyColors.hotGreen),
-          Padding(
-            padding: const EdgeInsets.all(3),
-            child: FaIcon(FontAwesomeIcons.prescriptionBottleAlt,
-                size: 28,
-                color: _selectedIndex != 1
-                    ? MyColors.iconDisable
-                    : MyColors.hotBlue),
-          ),
+          FaIcon(FontAwesomeIcons.capsules,
+              size: 30,
+              color: _selectedIndex != 1
+                  ? MyColors.iconDisable
+                  : MyColors.hotBlue),
           FaIcon(FontAwesomeIcons.virus,
               size: 30,
               color: _selectedIndex != 2 ? MyColors.iconDisable : Colors.pink),
@@ -130,7 +127,8 @@ class _HomePageState extends State<HomePage> {
         setState(() {
           _countryList = List<Country>.from(
               iterableCountries.map((model) => Country.fromJson(model)));
-          _countryList.sort((a, b) => b.cases.compareTo(a.cases));
+          _countryList.sort((a, b) => int.parse(b.cases.replaceAll(",", ""))
+              .compareTo(int.parse(a.cases.replaceAll(",", ""))));
 
           _vaccineList = List<Vaccine>.from(
               iterableVaccines['data'].map((model) => Vaccine.fromJson(model)));

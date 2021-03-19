@@ -30,11 +30,7 @@ class CountryDetail extends StatelessWidget {
                 Container(
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height / 2.5,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage('assets/images/pink.png'),
-                            fit: BoxFit.cover,
-                            alignment: Alignment.topCenter)),
+                    decoration: BoxDecoration(color: MyColors.hotPink),
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -56,7 +52,7 @@ class CountryDetail extends StatelessWidget {
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /
-                                                3,
+                                                4,
                                           ))))),
                           Text(
                             '${this.country.country}',
@@ -66,19 +62,24 @@ class CountryDetail extends StatelessWidget {
                                 fontWeight: FontWeight.bold),
                           )
                         ])),
-                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Text(
-                    'Population: ',
-                    style: headerBold,
-                  ),
-                  Text(
-                    '${this.country.population}',
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.pink.shade400,
-                        fontWeight: FontWeight.bold),
-                  )
-                ]),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Population: ',
+                          style: headerBold,
+                        ),
+                        Text(
+                          '${this.country.population}',
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.pink.shade400,
+                              fontWeight: FontWeight.bold),
+                        )
+                      ]),
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   child: Row(

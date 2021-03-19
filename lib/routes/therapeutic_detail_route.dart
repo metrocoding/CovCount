@@ -1,14 +1,14 @@
-import 'package:covid_count/models/vaccine.dart';
+import 'package:covid_count/models/therapeutic.dart';
 import 'package:covid_count/resource/colors.dart';
 import 'package:covid_count/widgets/back_button.dart';
 import 'package:covid_count/widgets/country/detail/white_box.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class VaccineDetail extends StatelessWidget {
-  final Vaccine vaccine;
+class TherapeuticDetail extends StatelessWidget {
+  final Therapeutic therapeutic;
 
-  const VaccineDetail({Key key, this.vaccine}) : super(key: key);
+  const TherapeuticDetail({Key key, this.therapeutic}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class VaccineDetail extends StatelessWidget {
                 Container(
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height / 2.5,
-                    color: MyColors.hotGreen,
+                    decoration: BoxDecoration(color: MyColors.hotBlue),
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -37,8 +37,8 @@ class VaccineDetail extends StatelessWidget {
                               child: Padding(
                                   padding: const EdgeInsets.all(5),
                                   child: Image(
-                                    image:
-                                        AssetImage('assets/images/syringe.png'),
+                                    image: AssetImage(
+                                        'assets/images/medicine.png'),
                                     width:
                                         MediaQuery.of(context).size.width / 4,
                                   )))
@@ -47,18 +47,18 @@ class VaccineDetail extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 20),
                     child: Text(
-                      'Mechanism',
+                      'Medication Class',
                       style: headerBold,
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Text(
-                      '${this.vaccine.mechanism}',
+                      '${this.therapeutic.medicationClass}',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 18,
-                          color: MyColors.hotGreen,
+                          color: MyColors.hotBlue,
                           fontWeight: FontWeight.bold),
                     ),
                   )
@@ -70,18 +70,18 @@ class VaccineDetail extends StatelessWidget {
                       Row(
                         children: [
                           FaIcon(
-                            FontAwesomeIcons.award,
+                            FontAwesomeIcons.trademark,
                             size: 20,
                           ),
-                          Text(' Candidate',
+                          Text(' Trade Name',
                               style: TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.bold))
                         ],
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 5),
-                        child:
-                            _getStringColumn([this.vaccine.candidate], context),
+                        child: _getStringColumn(
+                            this.therapeutic.tradeName, context),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 10),
@@ -99,7 +99,8 @@ class VaccineDetail extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 5),
-                        child: _getStringColumn(this.vaccine.sponsors, context),
+                        child: _getStringColumn(
+                            this.therapeutic.sponsors, context),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 10),
@@ -109,7 +110,7 @@ class VaccineDetail extends StatelessWidget {
                               FontAwesomeIcons.flask,
                               size: 20,
                             ),
-                            Text(' Institutions',
+                            Text(' Developer Researcher',
                                 style: TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.bold))
                           ],
@@ -118,7 +119,7 @@ class VaccineDetail extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 5),
                         child: _getStringColumn(
-                            this.vaccine.institutions, context),
+                            this.therapeutic.developerResearcher, context),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 10),
@@ -137,7 +138,26 @@ class VaccineDetail extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 5),
                         child: _getStringColumn(
-                            [this.vaccine.trialPhase], context),
+                            [this.therapeutic.trialPhase], context),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: Row(
+                          children: [
+                            FaIcon(
+                              FontAwesomeIcons.calendarTimes,
+                              size: 20,
+                            ),
+                            Text(' Last Update',
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold))
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        child: _getStringColumn(
+                            [this.therapeutic.lastUpdate], context),
                       ),
                     ],
                   ),
@@ -160,7 +180,8 @@ class VaccineDetail extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 5),
-                      child: _getStringColumn([this.vaccine.details], context),
+                      child:
+                          _getStringColumn([this.therapeutic.details], context),
                     )
                   ],
                 )

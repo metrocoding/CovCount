@@ -1,20 +1,22 @@
+import 'package:covid_count/utility/util.dart';
+
 class Country {
-  int updated;
+  String updated;
   String country;
   String flag;
-  int cases;
+  String cases;
   String todayCases;
-  int deaths;
+  String deaths;
   String todayDeaths;
-  int recovered;
+  String recovered;
   String todayRecovered;
-  int active;
-  int critical;
+  String active;
+  String critical;
   String casesPerOneMillion;
   String deathsPerOneMillion;
-  int tests;
+  String tests;
   String testsPerOneMillion;
-  int population;
+  String population;
   String continent;
   String oneCasePerPeople;
   String oneDeathPerPeople;
@@ -62,28 +64,28 @@ class Country {
     }
 
     return Country(
-        json['updated'],
+        Util.toNumericFormat(json['updated'].toString()),
         json['country'],
         json['countryInfo']['flag'],
-        json['cases'],
-        tCase,
-        json['deaths'],
-        tDeath,
-        json['recovered'],
-        tRecovered,
-        json['active'],
-        json['critical'],
-        json['casesPerOneMillion'].toString(),
-        json['deathsPerOneMillion'].toString(),
-        json['tests'],
-        json['testsPerOneMillion'].toString(),
-        json['population'],
+        Util.toNumericFormat(json['cases'].toString()),
+        Util.toNumericFormat(tCase),
+        Util.toNumericFormat(json['deaths'].toString()),
+        Util.toNumericFormat(tDeath),
+        Util.toNumericFormat(json['recovered'].toString()),
+        Util.toNumericFormat(tRecovered),
+        Util.toNumericFormat(json['active'].toString()),
+        Util.toNumericFormat(json['critical'].toString()),
+        Util.toNumericFormat(json['casesPerOneMillion'].toString()),
+        Util.toNumericFormat(json['deathsPerOneMillion'].toString()),
+        Util.toNumericFormat(json['tests'].toString()),
+        Util.toNumericFormat(json['testsPerOneMillion'].toString()),
+        Util.toNumericFormat(json['population'].toString()),
         json['continent'],
-        json['oneCasePerPeople'].toString(),
-        json['oneDeathPerPeople'].toString(),
-        json['oneTestPerPeople'].toString(),
-        json['activePerOneMillion'].toString(),
-        json['recoveredPerOneMillion'].toString(),
-        json['criticalPerOneMillion'].toString());
+        Util.toNumericFormat(json['oneCasePerPeople'].toString()),
+        Util.toNumericFormat(json['oneDeathPerPeople'].toString()),
+        Util.toNumericFormat(json['oneTestPerPeople'].toString()),
+        Util.toNumericFormat(json['activePerOneMillion'].toString()),
+        Util.toNumericFormat(json['recoveredPerOneMillion'].toString()),
+        Util.toNumericFormat(json['criticalPerOneMillion'].toString()));
   }
 }
