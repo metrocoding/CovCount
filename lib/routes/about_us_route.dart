@@ -9,7 +9,7 @@ class AboutUsRoute extends StatelessWidget {
       height: MediaQuery.of(context).size.height - 90,
       decoration: BoxDecoration(color: MyColors.background),
       child: Column(
-        // mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 80),
@@ -79,6 +79,18 @@ class AboutUsRoute extends StatelessWidget {
             child: Text(
               'If you like this app please rate and review it on store.',
               style: TextStyle(fontSize: 16),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Row(
+              children: [
+                Text(
+                  'App logo icon provided by Flaticon.com',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(fontSize: 16),
+                ),
+              ],
             ),
           )
         ],

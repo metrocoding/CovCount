@@ -1,4 +1,4 @@
-package com.example.covid_count
+package com.secretsofcode.covid_count
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -16,6 +16,13 @@ dependencies:
   http: ^0.13.0
   intl: ^0.17.0
   font_awesome_flutter: ^9.0.0
+  flutter_launcher_icons: "^0.8.0"
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path_ios: "assets/images/4.png"
+  image_path_android: "assets/images/covcount.png"
 
 dev_dependencies:
   flutter_test:
