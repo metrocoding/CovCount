@@ -1,3 +1,5 @@
+import 'package:html_unescape/html_unescape.dart';
+
 class Vaccine {
   String candidate;
   String mechanism;
@@ -18,7 +20,9 @@ class Vaccine {
     for (int i = 0; i < json['institutions'].length; i++)
       institutions.add(json['institutions'][i]);
 
+    var unescape = new HtmlUnescape();
+
     return Vaccine(json['candidate'], json['mechanism'], sponsors,
-        json['details'], json['trialPhase'], institutions);
+        unescape.convert(json['details']), json['trialPhase'], institutions);
   }
 }

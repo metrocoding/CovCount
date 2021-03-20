@@ -1,3 +1,5 @@
+import 'package:html_unescape/html_unescape.dart';
+
 class Therapeutic {
   String medicationClass;
   String details;
@@ -24,9 +26,11 @@ class Therapeutic {
     for (int i = 0; i < json['developerResearcher'].length; i++)
       developerResearcher.add(json['developerResearcher'][i]);
 
+    var unescape = new HtmlUnescape();
+
     return Therapeutic(
         json['medicationClass'],
-        json['details'],
+        unescape.convert(json['details']),
         json['trialPhase'],
         json['lastUpdate'],
         tradeName,
