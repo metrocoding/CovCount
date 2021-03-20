@@ -1,3 +1,4 @@
+# [![Flutter logo][]][flutter.dev]
 # CovCount
 
 Flutter project.
