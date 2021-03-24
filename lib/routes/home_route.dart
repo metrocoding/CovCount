@@ -1,17 +1,22 @@
+import 'dart:collection';
 import 'dart:convert';
 
 import 'package:covid_count/enum/ConnectionStatus.dart';
 import 'package:covid_count/models/country.dart';
 import 'package:covid_count/models/therapeutic.dart';
+import 'package:covid_count/models/united_state.dart';
+import 'package:covid_count/models/vaccination.dart';
 import 'package:covid_count/models/vaccine.dart';
 import 'package:covid_count/models/world.dart';
 import 'package:covid_count/resource/colors.dart';
 import 'package:covid_count/routes/about_us_route.dart';
 import 'package:covid_count/routes/countries_route.dart';
 import 'package:covid_count/routes/therapeutic_route.dart';
+import 'package:covid_count/routes/vaccination_route.dart';
 import 'package:covid_count/routes/vaccine_route.dart';
 import 'package:covid_count/widgets/connection_error.dart';
 import 'package:covid_count/widgets/waiting.dart';
+import 'package:csv/csv.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -35,11 +40,19 @@ class _HomePageState extends State<HomePage> {
   List<Country> _countryList = [];
   List<Vaccine> _vaccineList = [];
   List<Therapeutic> _therapeuticList = [];
+  List<Vaccination> _vaccinatedList = [];
+
+  // List<UnitedStateVaccination> _usVaccine = [];
+  LinkedHashMap<dynamic, List<Map<String, String>>> _usGrouped;
   World _world;
 
   List<Widget> _pages = <Widget>[
     VaccineRoute([], () {}),
+    TherapeuticRoute([], () {}),
     CountriesRoute([], null, () {}),
+    VaccinationRoute(
+        usGrouped: LinkedHashMap<dynamic, List<Map<String, String>>>(),
+        vaccinatedList: []),
     AboutUsRoute()
   ];
 
@@ -54,7 +67,7 @@ class _HomePageState extends State<HomePage> {
               size: 30,
               color: _selectedIndex != 0
                   ? MyColors.iconDisable
-                  : MyColors.hotGreen),
+                  : MyColors.hotGreenBlue),
           FaIcon(FontAwesomeIcons.capsules,
               size: 30,
               color: _selectedIndex != 1
@@ -63,9 +76,14 @@ class _HomePageState extends State<HomePage> {
           FaIcon(FontAwesomeIcons.virus,
               size: 30,
               color: _selectedIndex != 2 ? MyColors.iconDisable : Colors.pink),
-          FaIcon(FontAwesomeIcons.infoCircle,
+          FaIcon(FontAwesomeIcons.shieldVirus,
               size: 30,
               color: _selectedIndex != 3
+                  ? MyColors.iconDisable
+                  : MyColors.hotGreen),
+          FaIcon(FontAwesomeIcons.infoCircle,
+              size: 30,
+              color: _selectedIndex != 4
                   ? MyColors.iconDisable
                   : MyColors.hotPurple)
         ],
@@ -102,6 +120,9 @@ class _HomePageState extends State<HomePage> {
         _connectionStatus = ConnectionStatus.Started;
       });
 
+      Response responseCsv = await http.get(Uri.https(
+          'raw.githubusercontent.com',
+          'owid/covid-19-data/master/public/data/vaccinations/us_state_vaccinations.csv'));
       Response responseCountry =
           await http.get(Uri.https('disease.sh', 'v3/covid-19/countries'));
       Response responseVaccine =
@@ -110,21 +131,35 @@ class _HomePageState extends State<HomePage> {
           await http.get(Uri.https('disease.sh', 'v3/covid-19/all'));
       Response responseTherapeutic =
           await http.get(Uri.https('disease.sh', 'v3/covid-19/therapeutics'));
+      Response responseVaccination = await http.get(Uri.https(
+          'raw.githubusercontent.com',
+          'owid/covid-19-data/master/public/data/vaccinations/vaccinations.json'));
 
       if (responseCountry.statusCode != 200 ||
           responseVaccine.statusCode != 200 ||
           responseWorld.statusCode != 200 ||
+          responseCsv.statusCode != 200 ||
+          responseVaccination.statusCode != 200 ||
           responseTherapeutic.statusCode != 200) {
         setState(() {
           _connectionStatus = ConnectionStatus.Error;
         });
       } else {
+        var rowsAsListOfValues =
+            const CsvToListConverter().convert(responseCsv.body, eol: "\n");
+        var convertedCSV = UnitedStateVaccination.csvToList(rowsAsListOfValues);
+        // _usVaccine = convertedCSV[0];
+        _usGrouped = convertedCSV[0];
+
         var iterableCountries = json.decode(responseCountry.body);
         var iterableVaccines = json.decode(responseVaccine.body);
         var iterableTherapeutics = json.decode(responseTherapeutic.body);
+        var iterableVaccination = json.decode(responseVaccination.body);
         _world = World.fromJson(json.decode(responseWorld.body));
 
         setState(() {
+          _vaccinatedList = List<Vaccination>.from(
+              iterableVaccination.map((model) => Vaccination.fromJson(model)));
           _countryList = List<Country>.from(
               iterableCountries.map((model) => Country.fromJson(model)));
           _countryList.sort((a, b) => int.parse(b.cases.replaceAll(",", ""))
@@ -140,6 +175,8 @@ class _HomePageState extends State<HomePage> {
             VaccineRoute(_vaccineList, _getData),
             TherapeuticRoute(_therapeuticList, _getData),
             CountriesRoute(_countryList, _world, _getData),
+            VaccinationRoute(
+                usGrouped: _usGrouped, vaccinatedList: _vaccinatedList),
             AboutUsRoute()
           ];
 

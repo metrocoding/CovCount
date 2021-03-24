@@ -1,26 +1,25 @@
 import 'package:covid_count/resource/colors.dart';
+import 'package:covid_count/utility/util.dart';
 import 'package:flutter/material.dart';
 
-class VaccineListHeader extends StatelessWidget {
-  final int vaccineCount;
+class WorldVaccinationHeader extends StatelessWidget {
+  final int vaccinationCount;
 
-  const VaccineListHeader({Key key, this.vaccineCount}) : super(key: key);
+  const WorldVaccinationHeader({Key key, this.vaccinationCount})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
         width: MediaQuery.of(context).size.width - 40,
-        decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 5,
-                blurRadius: 15,
-                offset: Offset(0, 3), // changes position of shadow
-              ),
-            ],
-            borderRadius: BorderRadius.circular(15),
-            color: MyColors.hotGreenBlue),
+        decoration: BoxDecoration(boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 5,
+            blurRadius: 15,
+            offset: Offset(0, 3), // changes position of shadow
+          ),
+        ], borderRadius: BorderRadius.circular(15), color: MyColors.hotGreen),
         child: Padding(
             padding: const EdgeInsets.all(20),
             child: Column(children: [
@@ -30,7 +29,7 @@ class VaccineListHeader extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Vaccines Data',
+                          'Vaccination Data',
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -44,7 +43,7 @@ class VaccineListHeader extends StatelessWidget {
                       ])),
               Row(children: [
                 Text(
-                  'Total vaccines:',
+                  'Total vaccination:',
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -53,7 +52,7 @@ class VaccineListHeader extends StatelessWidget {
                 Padding(
                     padding: const EdgeInsets.only(left: 10),
                     child: Text(
-                      '$vaccineCount',
+                      '${Util.toNumericFormat(vaccinationCount.toString())}',
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w800,

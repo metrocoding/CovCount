@@ -27,7 +27,7 @@ class VaccineDetail extends StatelessWidget {
                 Container(
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height / 2.5,
-                    color: MyColors.hotGreen,
+                    color: MyColors.hotGreenBlue,
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -58,7 +58,7 @@ class VaccineDetail extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 18,
-                          color: MyColors.hotGreen,
+                          color: MyColors.hotGreenBlue,
                           fontWeight: FontWeight.bold),
                     ),
                   )

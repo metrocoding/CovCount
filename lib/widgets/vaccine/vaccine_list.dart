@@ -111,7 +111,7 @@ class VaccineList extends StatelessWidget {
                                                           fontWeight:
                                                               FontWeight.w700,
                                                           color: MyColors
-                                                              .hotGreen)),
+                                                              .hotGreenBlue)),
                                                 ),
                                               ]),
                                         ),
@@ -129,7 +129,8 @@ class VaccineList extends StatelessWidget {
                                                 style: TextStyle(
                                                     fontSize: 14,
                                                     fontWeight: FontWeight.w700,
-                                                    color: MyColors.hotGreen)),
+                                                    color:
+                                                        MyColors.hotGreenBlue)),
                                           ]),
                                         )
                                       ])))))),
