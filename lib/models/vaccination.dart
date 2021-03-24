@@ -1,5 +1,23 @@
 class Vaccination {
   String country;
+  String iso;
+  List<VaccineData> data;
+
+  Vaccination(this.country, this.iso, this.data);
+
+  factory Vaccination.fromJson(Map<String, dynamic> jsonData) {
+    List<dynamic> dataValues = jsonData['data'];
+
+    List<VaccineData> data = [];
+    for (int i = 0; i < dataValues.length; i++) {
+      data.add(VaccineData.fromJson(dataValues[i]));
+    }
+
+    return Vaccination(jsonData['country'], jsonData['iso_code'], data);
+  }
+}
+
+class VaccineData {
   String date;
   String totalVaccinations;
   String peopleVaccinated;
@@ -8,8 +26,7 @@ class Vaccination {
   String peopleVaccinatedPerHundred;
   String peopleFullyVaccinatedPerHundred;
 
-  Vaccination(
-      this.country,
+  VaccineData(
       this.date,
       this.totalVaccinations,
       this.peopleVaccinated,
@@ -18,41 +35,29 @@ class Vaccination {
       this.peopleVaccinatedPerHundred,
       this.peopleFullyVaccinatedPerHundred);
 
-  factory Vaccination.fromJson(Map<String, dynamic> jsonData) {
-    List<dynamic> data = jsonData['data'];
-    data.sort((a, b) =>
-        DateTime.parse(b['date']).compareTo(DateTime.parse(a['date'])));
-    var lastData = data[0];
-
-    String totalVax = lastData['total_vaccinations'] != null
-        ? lastData['total_vaccinations'].toString()
+  factory VaccineData.fromJson(dynamic jsonData) {
+    String totalVax = jsonData['total_vaccinations'] != null
+        ? jsonData['total_vaccinations'].toString()
         : '0';
-    String peopleVax = lastData['people_vaccinated'] != null
-        ? lastData['people_vaccinated'].toString()
+    String peopleVax = jsonData['people_vaccinated'] != null
+        ? jsonData['people_vaccinated'].toString()
         : '0';
-    String fullyVax = lastData['people_fully_vaccinated'] != null
-        ? lastData['people_fully_vaccinated'].toString()
+    String fullyVax = jsonData['people_fully_vaccinated'] != null
+        ? jsonData['people_fully_vaccinated'].toString()
         : '0';
-    String totalVaxPercent = lastData['total_vaccinations_per_hundred'] != null
-        ? lastData['total_vaccinations_per_hundred'].toString()
+    String totalVaxPercent = jsonData['total_vaccinations_per_hundred'] != null
+        ? jsonData['total_vaccinations_per_hundred'].toString()
         : '0';
     String peopleVaxPercentage =
-        lastData['people_vaccinated_per_hundred'] != null
-            ? lastData['people_vaccinated_per_hundred'].toString()
+        jsonData['people_vaccinated_per_hundred'] != null
+            ? jsonData['people_vaccinated_per_hundred'].toString()
             : '0';
     String totalFullyVax =
-        lastData['people_fully_vaccinated_per_hundred'] != null
-            ? lastData['people_fully_vaccinated_per_hundred'].toString()
+        jsonData['people_fully_vaccinated_per_hundred'] != null
+            ? jsonData['people_fully_vaccinated_per_hundred'].toString()
             : '0';
 
-    return Vaccination(
-        jsonData['country'],
-        lastData['date'],
-        totalVax,
-        peopleVax,
-        fullyVax,
-        totalVaxPercent,
-        peopleVaxPercentage,
-        totalFullyVax);
+    return VaccineData(jsonData['date'], totalVax, peopleVax, fullyVax,
+        totalVaxPercent, peopleVaxPercentage, totalFullyVax);
   }
 }

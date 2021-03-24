@@ -36,7 +36,7 @@ class WorldVaccinationHeader extends StatelessWidget {
                               fontSize: 23),
                         ),
                         Image(
-                          image: AssetImage("assets/images/syringe.png"),
+                          image: AssetImage("assets/images/injection.png"),
                           height: 40,
                           width: 40,
                         )
