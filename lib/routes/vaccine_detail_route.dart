@@ -27,7 +27,16 @@ class VaccineDetail extends StatelessWidget {
                 Container(
                     width: MediaQuery.of(context).size.width,
                     height: 250,
-                    color: MyColors.hotGreenBlue,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        colors: [
+                          MyColors.lightGreenBlue,
+                          MyColors.hotGreenBlue,
+                        ],
+                      ),
+                    ),
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [

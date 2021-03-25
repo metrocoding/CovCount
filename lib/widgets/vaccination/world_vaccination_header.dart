@@ -12,14 +12,25 @@ class WorldVaccinationHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         width: MediaQuery.of(context).size.width - 40,
-        decoration: BoxDecoration(boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 5,
-            blurRadius: 15,
-            offset: Offset(0, 3), // changes position of shadow
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 15,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ],
+          borderRadius: BorderRadius.circular(15),
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [
+              MyColors.lightGreen,
+              MyColors.hotGreen,
+            ],
           ),
-        ], borderRadius: BorderRadius.circular(15), color: MyColors.hotGreen),
+        ),
         child: Padding(
             padding: const EdgeInsets.all(20),
             child: Column(children: [

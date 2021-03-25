@@ -46,12 +46,14 @@ class Vaccination {
       var totalDistribution = rowsAsListOfValues[i][3] != ''
           ? rowsAsListOfValues[i][3].toStringAsFixed(0)
           : '0';
-      var distributionPercentage = rowsAsListOfValues[i][9] != ''
-          ? rowsAsListOfValues[i][9].toStringAsFixed(2)
-          : '0';
-      var dailyVaccination = rowsAsListOfValues[i][11] != ''
-          ? rowsAsListOfValues[i][11].toStringAsFixed(0)
-          : '0';
+      var distributionPercentage =
+          rowsAsListOfValues[i][9] != '' && rowsAsListOfValues[i][9] != null
+              ? rowsAsListOfValues[i][9].toStringAsFixed(2)
+              : '0';
+      var dailyVaccination =
+          rowsAsListOfValues[i][11] != '' && rowsAsListOfValues[i][11] != null
+              ? rowsAsListOfValues[i][11].toStringAsFixed(0)
+              : '0';
       // var dailyVaccinationPerMillion = rowsAsListOfValues[i][12] != ''
       //     ? (rowsAsListOfValues[i][12]).toStringAsFixed(2)
       //     : '0';
@@ -107,7 +109,7 @@ class VaccineData {
       this.peopleVaccinatedPerHundred,
       this.peopleFullyVaccinatedPerHundred,
       {this.totalDistribution,
-      this.distributionPercentage,
+      this.distributionPercentage = '0',
       this.dailyVaccination});
 
   factory VaccineData.fromJson(dynamic jsonData) {

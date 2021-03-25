@@ -11,9 +11,9 @@ class StatisticRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextStyle lightTextStatistic = TextStyle(
-        fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black54);
+        fontSize: 14, fontWeight: FontWeight.bold, color: Colors.black54);
     TextStyle numeriStatistics = TextStyle(
-        fontSize: 16,
+        fontSize: 14,
         color: color != null ? color : Colors.pink.shade400,
         fontWeight: FontWeight.bold);
 

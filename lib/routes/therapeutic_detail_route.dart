@@ -27,7 +27,16 @@ class TherapeuticDetail extends StatelessWidget {
                 Container(
                     width: MediaQuery.of(context).size.width,
                     height: 250,
-                    decoration: BoxDecoration(color: MyColors.hotBlue),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        colors: [
+                          MyColors.lightBlue,
+                          MyColors.hotBlue,
+                        ],
+                      ),
+                    ),
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [

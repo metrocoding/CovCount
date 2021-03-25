@@ -30,7 +30,16 @@ class CountryDetail extends StatelessWidget {
                 Container(
                     width: MediaQuery.of(context).size.width,
                     height: 250,
-                    decoration: BoxDecoration(color: MyColors.hotPink),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        colors: [
+                          MyColors.lightPink,
+                          MyColors.hotPink,
+                        ],
+                      ),
+                    ),
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -39,13 +48,13 @@ class CountryDetail extends StatelessWidget {
                               padding: const EdgeInsets.only(bottom: 20),
                               child: Container(
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(150),
+                                      borderRadius: BorderRadius.circular(5),
                                       color: Colors.white),
                                   child: Padding(
-                                      padding: const EdgeInsets.all(5),
+                                      padding: const EdgeInsets.all(2),
                                       child: ClipRRect(
                                           borderRadius:
-                                              BorderRadius.circular(150),
+                                              BorderRadius.circular(5),
                                           child: Image(
                                             image:
                                                 NetworkImage(this.country.flag),

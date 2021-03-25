@@ -30,7 +30,16 @@ class VaccinationCountryHistoryRoute extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Container(
-                    decoration: BoxDecoration(color: MyColors.hotGreen),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        colors: [
+                          MyColors.lightGreen,
+                          MyColors.hotGreen,
+                        ],
+                      ),
+                    ),
                     padding: EdgeInsets.only(bottom: 20),
                     child: Column(
                       children: [

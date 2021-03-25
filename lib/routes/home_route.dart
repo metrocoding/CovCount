@@ -172,6 +172,7 @@ class _HomePageState extends State<HomePage> {
         });
       }
     } catch (exception) {
+      print(exception);
       setState(() {
         _connectionStatus = ConnectionStatus.Error;
       });
