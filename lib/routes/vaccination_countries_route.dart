@@ -8,8 +8,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class VaccinationCountryRoute extends StatelessWidget {
   final List<Vaccination> vaccinatedList;
+  final String title;
 
-  const VaccinationCountryRoute({Key key, this.vaccinatedList})
+  const VaccinationCountryRoute({Key key, this.vaccinatedList, this.title})
       : super(key: key);
 
   @override
@@ -38,7 +39,7 @@ class VaccinationCountryRoute extends StatelessWidget {
                               size: 30, color: Colors.white),
                           SizedBox(width: 10),
                           Text(
-                            'Vaccination List',
+                            title,
                             style: TextStyle(
                                 fontSize: 23,
                                 fontWeight: FontWeight.bold,
@@ -95,7 +96,7 @@ class VaccinationCountryRoute extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Text(
-                                    vaccinatedList[index].country,
+                                    vaccinatedList[index].location,
                                     style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold),

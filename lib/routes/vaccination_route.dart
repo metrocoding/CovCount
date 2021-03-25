@@ -1,15 +1,13 @@
-import 'dart:collection';
-
 import 'package:covid_count/models/vaccination.dart';
 import 'package:covid_count/models/vaccine_history_chart.dart';
 import 'package:covid_count/resource/colors.dart';
 import 'package:covid_count/routes/vaccination_countries_route.dart';
+import 'package:covid_count/widgets/linear_chart.dart';
 import 'package:covid_count/widgets/vaccination/world_vaccination_header.dart';
 import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 
 class VaccinationRoute extends StatelessWidget {
-  final LinkedHashMap<dynamic, List<Map<String, String>>> usGrouped;
+  final List<Vaccination> usGrouped;
   final List<Vaccination> vaccinatedList;
 
   const VaccinationRoute({Key key, this.usGrouped, this.vaccinatedList})
@@ -18,7 +16,7 @@ class VaccinationRoute extends StatelessWidget {
   int get getVaccinationCount {
     int totalCount = 0;
     vaccinatedList.forEach((vaccination) {
-      if (vaccination.country == 'World')
+      if (vaccination.location == 'World')
         totalCount += int.parse(
             vaccination.data[vaccination.data.length - 1].totalVaccinations);
     });
@@ -49,6 +47,7 @@ class VaccinationRoute extends StatelessWidget {
                         MaterialPageRoute(
                           builder: (context) => VaccinationCountryRoute(
                             vaccinatedList: this.vaccinatedList,
+                            title: 'Global Vaccination List',
                           ),
                         ),
                       ),
@@ -68,7 +67,7 @@ class VaccinationRoute extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.only(left: 10),
                                 child: Text(
-                                  'World detail',
+                                  'World Vaccination Detail',
                                   style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold),
@@ -84,7 +83,15 @@ class VaccinationRoute extends StatelessWidget {
                 Material(
                   color: Colors.transparent,
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => VaccinationCountryRoute(
+                          vaccinatedList: this.usGrouped,
+                          title: 'US Vaccination List',
+                        ),
+                      ),
+                    ),
                     child: Card(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15.0),
@@ -101,7 +108,7 @@ class VaccinationRoute extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.only(left: 10),
                               child: Text(
-                                'United State detail',
+                                'US Vaccination Detail',
                                 style: TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.bold),
                               ),
@@ -112,23 +119,10 @@ class VaccinationRoute extends StatelessWidget {
                     ),
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.only(top: 20),
-                  child: SfCartesianChart(
-                    primaryXAxis: CategoryAxis(),
-                    // Chart title
-                    title:
-                        ChartTitle(text: 'Vaccination reports (million dose)'),
-                    enableSideBySideSeriesPlacement: true,
-                    series: <LineSeries<VacHistory, String>>[
-                      LineSeries<VacHistory, String>(
-                          dataSource: VacHistory.makeList(this.vaccinatedList),
-                          xValueMapper: (VacHistory vax, _) => vax.date,
-                          yValueMapper: (VacHistory vax, _) => vax.total,
-                          dataLabelSettings:
-                              DataLabelSettings(isVisible: false)),
-                    ],
-                  ),
+                LinearChart(
+                  title: 'Vaccination reports (million dose)',
+                  vaccinatedList:
+                      VaccinationChartData.makeList(this.vaccinatedList),
                 ),
               ],
             ),

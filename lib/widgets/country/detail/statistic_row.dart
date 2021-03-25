@@ -3,15 +3,19 @@ import 'package:flutter/material.dart';
 class StatisticRow extends StatelessWidget {
   final String text;
   final String value;
+  final Color color;
 
-  const StatisticRow({Key key, this.text, this.value}) : super(key: key);
+  const StatisticRow({Key key, this.text, this.value, this.color})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     TextStyle lightTextStatistic = TextStyle(
         fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black54);
     TextStyle numeriStatistics = TextStyle(
-        fontSize: 16, color: Colors.pink.shade400, fontWeight: FontWeight.bold);
+        fontSize: 16,
+        color: color != null ? color : Colors.pink.shade400,
+        fontWeight: FontWeight.bold);
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 5),

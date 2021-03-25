@@ -26,7 +26,7 @@ class TherapeuticDetail extends StatelessWidget {
               children: <Widget>[
                 Container(
                     width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height / 2.5,
+                    height: 250,
                     decoration: BoxDecoration(color: MyColors.hotBlue),
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -39,8 +39,7 @@ class TherapeuticDetail extends StatelessWidget {
                                   child: Image(
                                     image: AssetImage(
                                         'assets/images/medicine.png'),
-                                    width:
-                                        MediaQuery.of(context).size.width / 4,
+                                    width: 80,
                                   )))
                         ])),
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [

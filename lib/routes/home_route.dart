@@ -1,10 +1,8 @@
-import 'dart:collection';
 import 'dart:convert';
 
 import 'package:covid_count/enum/ConnectionStatus.dart';
 import 'package:covid_count/models/country.dart';
 import 'package:covid_count/models/therapeutic.dart';
-import 'package:covid_count/models/united_state.dart';
 import 'package:covid_count/models/vaccination.dart';
 import 'package:covid_count/models/vaccine.dart';
 import 'package:covid_count/models/world.dart';
@@ -16,7 +14,6 @@ import 'package:covid_count/routes/vaccination_route.dart';
 import 'package:covid_count/routes/vaccine_route.dart';
 import 'package:covid_count/widgets/connection_error.dart';
 import 'package:covid_count/widgets/waiting.dart';
-import 'package:csv/csv.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -41,18 +38,14 @@ class _HomePageState extends State<HomePage> {
   List<Vaccine> _vaccineList = [];
   List<Therapeutic> _therapeuticList = [];
   List<Vaccination> _vaccinatedList = [];
-
-  // List<UnitedStateVaccination> _usVaccine = [];
-  LinkedHashMap<dynamic, List<Map<String, String>>> _usGrouped;
+  List<Vaccination> _usGrouped;
   World _world;
 
   List<Widget> _pages = <Widget>[
     VaccineRoute([], () {}),
     TherapeuticRoute([], () {}),
     CountriesRoute([], null, () {}),
-    VaccinationRoute(
-        usGrouped: LinkedHashMap<dynamic, List<Map<String, String>>>(),
-        vaccinatedList: []),
+    VaccinationRoute(usGrouped: [], vaccinatedList: []),
     AboutUsRoute()
   ];
 
@@ -145,12 +138,6 @@ class _HomePageState extends State<HomePage> {
           _connectionStatus = ConnectionStatus.Error;
         });
       } else {
-        var rowsAsListOfValues =
-            const CsvToListConverter().convert(responseCsv.body, eol: "\n");
-        var convertedCSV = UnitedStateVaccination.csvToList(rowsAsListOfValues);
-        // _usVaccine = convertedCSV[0];
-        _usGrouped = convertedCSV[0];
-
         var iterableCountries = json.decode(responseCountry.body);
         var iterableVaccines = json.decode(responseVaccine.body);
         var iterableTherapeutics = json.decode(responseTherapeutic.body);
@@ -158,6 +145,7 @@ class _HomePageState extends State<HomePage> {
         _world = World.fromJson(json.decode(responseWorld.body));
 
         setState(() {
+          _usGrouped = Vaccination.csvToList(responseCsv.body);
           _vaccinatedList = List<Vaccination>.from(
               iterableVaccination.map((model) => Vaccination.fromJson(model)));
           _countryList = List<Country>.from(

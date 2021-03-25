@@ -1,21 +1,21 @@
 import 'package:covid_count/models/vaccination.dart';
 
-class VacHistory {
+class VaccinationChartData {
   String date;
   double total;
 
-  VacHistory(this.date, this.total);
+  VaccinationChartData(this.date, this.total);
 
-  static List<VacHistory> makeList(List<Vaccination> vaccinatedList) {
+  static List<VaccinationChartData> makeList(List<Vaccination> vaccinatedList) {
     try {
       var worldHistory = vaccinatedList
-          .where((element) => element.country == 'World')
+          .where((element) => element.location == 'World')
           .toList()[0]
           .data;
 
-      List<VacHistory> vac = [];
+      List<VaccinationChartData> vac = [];
       worldHistory.forEach((history) {
-        vac.add(VacHistory(
+        vac.add(VaccinationChartData(
             history.date, int.parse(history.totalVaccinations) / 1000000));
       });
       return vac;
@@ -24,13 +24,13 @@ class VacHistory {
     }
   }
 
-  static List<VacHistory> makeListVaccine(Vaccination vaccinate) {
+  static List<VaccinationChartData> makeListVaccine(Vaccination vaccinate) {
     try {
       var worldHistory = vaccinate.data;
 
-      List<VacHistory> vac = [];
+      List<VaccinationChartData> vac = [];
       worldHistory.forEach((history) {
-        vac.add(VacHistory(
+        vac.add(VaccinationChartData(
             history.date, int.parse(history.totalVaccinations) / 1000000));
       });
       return vac;

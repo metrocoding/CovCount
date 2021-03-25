@@ -29,7 +29,7 @@ class CountryDetail extends StatelessWidget {
               children: <Widget>[
                 Container(
                     width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height / 2.5,
+                    height: 250,
                     decoration: BoxDecoration(color: MyColors.hotPink),
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -49,10 +49,7 @@ class CountryDetail extends StatelessWidget {
                                           child: Image(
                                             image:
                                                 NetworkImage(this.country.flag),
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                4,
+                                            width: 80,
                                           ))))),
                           Text(
                             '${this.country.country}',
