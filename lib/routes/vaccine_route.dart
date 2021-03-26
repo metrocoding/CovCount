@@ -18,7 +18,7 @@ class VaccineRoute extends StatelessWidget {
             child: Container(
                 decoration: BoxDecoration(color: MyColors.background),
                 child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 70, 20, 0),
+                    padding: const EdgeInsets.fromLTRB(20, 50, 20, 0),
                     child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -27,11 +27,11 @@ class VaccineRoute extends StatelessWidget {
                             vaccineCount: vaccines.length,
                           ),
                           Padding(
-                            padding: const EdgeInsets.fromLTRB(5, 40, 20, 10),
+                            padding: const EdgeInsets.fromLTRB(5, 10, 20, 10),
                             child: Text(
                               'Latest Vaccine Updates',
                               style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
+                                  fontSize: 20, fontWeight: FontWeight.bold),
                             ),
                           ),
                           VaccineList(

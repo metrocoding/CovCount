@@ -9,34 +9,31 @@ class CountryListHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width - 40,
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 5,
-            blurRadius: 15,
-            offset: Offset(0, 3), // changes position of shadow
-          ),
-        ],
-        borderRadius: BorderRadius.circular(15),
-        gradient: LinearGradient(
-          begin: Alignment.topRight,
-          end: Alignment.bottomLeft,
-          colors: [
-            MyColors.lightPink,
-            MyColors.hotPink,
-          ],
-        ),
+    var textStyle = TextStyle(
+        color: Colors.white, fontWeight: FontWeight.w600, fontSize: 18);
+
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 20),
-              child: Row(
+      child: Container(
+        width: MediaQuery.of(context).size.width - 40,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [
+              MyColors.lightPink,
+              MyColors.hotPink,
+            ],
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: [
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
@@ -44,7 +41,7 @@ class CountryListHeader extends StatelessWidget {
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontSize: 23),
+                        fontSize: 25),
                   ),
                   Image(
                     image: AssetImage("assets/images/coronavirus.png"),
@@ -53,74 +50,53 @@ class CountryListHeader extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
-            Row(
-              children: [
-                Text(
-                  'Total cases:',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: Text(
-                    '${world.cases}',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 16),
+              Row(
+                children: [
+                  Text(
+                    'Total cases:',
+                    style: textStyle,
                   ),
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: Row(
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Text(
+                      '${world.cases}',
+                      style: textStyle,
+                    ),
+                  ),
+                ],
+              ),
+              Row(
                 children: [
                   Text(
                     'Total death:',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16),
+                    style: textStyle,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 10),
                     child: Text(
                       '${world.deaths}',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w800,
-                          fontSize: 16),
+                      style: textStyle,
                     ),
                   ),
                 ],
               ),
-            ),
-            Row(
-              children: [
-                Text(
-                  'Total recovered:',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: Text(
-                    '${world.recovered}',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 16),
+              Row(
+                children: [
+                  Text(
+                    'Total recovered:',
+                    style: textStyle,
                   ),
-                ),
-              ],
-            ),
-          ],
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Text(
+                      '${world.recovered}',
+                      style: textStyle,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

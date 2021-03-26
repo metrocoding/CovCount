@@ -8,66 +8,61 @@ class VaccineListHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        width: MediaQuery.of(context).size.width - 40,
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 5,
-              blurRadius: 15,
-              offset: Offset(0, 3), // changes position of shadow
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      child: Container(
+          width: MediaQuery.of(context).size.width - 40,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [
+                MyColors.lightGreenBlue,
+                MyColors.hotGreenBlue,
+              ],
             ),
-          ],
-          borderRadius: BorderRadius.circular(15),
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [
-              MyColors.lightGreenBlue,
-              MyColors.hotGreenBlue,
-            ],
           ),
-        ),
-        child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(children: [
-              Padding(
-                  padding: const EdgeInsets.only(bottom: 20),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Vaccines Data',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 23),
-                        ),
-                        Image(
-                          image: AssetImage("assets/images/syringe.png"),
-                          height: 40,
-                          width: 40,
-                        )
-                      ])),
-              Row(children: [
-                Text(
-                  'Total vaccines:',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16),
-                ),
-                Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: Text(
-                      '$vaccineCount',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w800,
-                          fontSize: 16),
-                    ))
-              ])
-            ])));
+          child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(children: [
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Vaccines Data',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25),
+                      ),
+                      Image(
+                        image: AssetImage("assets/images/syringe.png"),
+                        height: 40,
+                        width: 40,
+                      )
+                    ]),
+                Row(children: [
+                  Text(
+                    'Total vaccines:',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 18),
+                  ),
+                  Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Text(
+                        '$vaccineCount',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18),
+                      ))
+                ])
+              ]))),
+    );
   }
 }

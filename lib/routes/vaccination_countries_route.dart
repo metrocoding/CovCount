@@ -4,7 +4,6 @@ import 'package:covid_count/routes/vaccination_country_history.dart';
 import 'package:covid_count/utility/util.dart';
 import 'package:covid_count/widgets/back_button.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class VaccinationCountryRoute extends StatelessWidget {
   final List<Vaccination> vaccinatedList;
@@ -15,6 +14,10 @@ class VaccinationCountryRoute extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var titleStyle = TextStyle(fontSize: 16, fontWeight: FontWeight.w600);
+    var valueStyle = TextStyle(
+        fontSize: 16, fontWeight: FontWeight.w600, color: Colors.green);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -23,7 +26,7 @@ class VaccinationCountryRoute extends StatelessWidget {
           decoration: BoxDecoration(color: MyColors.background),
           alignment: Alignment.center,
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(0, 0, 0, 50),
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
             child: Column(
               children: <Widget>[
                 Container(
@@ -37,67 +40,40 @@ class VaccinationCountryRoute extends StatelessWidget {
                       ],
                     ),
                   ),
-                  padding: EdgeInsets.only(bottom: 20),
                   child: Column(
                     children: [
-                      CustomBackButton(),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          FaIcon(FontAwesomeIcons.globeAmericas,
-                              size: 30, color: Colors.white),
-                          SizedBox(width: 10),
-                          Text(
-                            title,
-                            style: TextStyle(
-                                fontSize: 23,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                        ],
-                      ),
+                      CustomBackButton(title),
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 20,
-                ),
                 Container(
-                  height: MediaQuery.of(context).size.height - 251,
-                  child: MediaQuery.removePadding(
-                    context: context,
-                    removeTop: true,
-                    child: ListView.builder(
-                      physics: AlwaysScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: vaccinatedList.length,
-                      itemBuilder: (context, index) => Material(
-                        borderRadius: BorderRadius.circular(5),
-                        color: Colors.transparent,
-                        child: InkWell(
-                          onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  VaccinationCountryHistoryRoute(
-                                vaccinateDetail: this.vaccinatedList[index],
-                              ),
+                  height: MediaQuery.of(context).size.height - 115,
+                  child: ListView.builder(
+                    padding: EdgeInsets.symmetric(vertical: 20),
+                    physics: AlwaysScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: vaccinatedList.length,
+                    itemBuilder: (context, index) => Material(
+                      borderRadius: BorderRadius.circular(5),
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                VaccinationCountryHistoryRoute(
+                              vaccinateDetail: this.vaccinatedList[index],
                             ),
                           ),
-                          child: Container(
-                            margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                            decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.3),
-                                    spreadRadius: 1,
-                                    blurRadius: 2,
-                                    offset: Offset(
-                                        0, 3), // changes position of shadow
-                                  )
-                                ],
-                                borderRadius: BorderRadius.circular(15),
-                                color: Colors.white),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                          ),
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
                             child: Padding(
                               padding: const EdgeInsets.all(10),
                               child: Column(
@@ -107,26 +83,20 @@ class VaccinationCountryRoute extends StatelessWidget {
                                   Text(
                                     vaccinatedList[index].location,
                                     style: TextStyle(
-                                        fontSize: 18,
+                                        fontSize: 20,
                                         fontWeight: FontWeight.bold),
                                   ),
                                   Padding(
-                                    padding:
-                                        const EdgeInsets.symmetric(vertical: 5),
+                                    padding: const EdgeInsets.only(top: 5),
                                     child: Row(
                                       children: [
                                         Text(
                                           'Total: ',
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.bold),
+                                          style: titleStyle,
                                         ),
                                         Text(
                                           '${Util.toNumericFormat(vaccinatedList[index].data.last.totalVaccinations)} - ${vaccinatedList[index].data.last.totalVaccinationsPerHundred}%',
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.green),
+                                          style: valueStyle,
                                         ),
                                       ],
                                     ),
@@ -135,16 +105,11 @@ class VaccinationCountryRoute extends StatelessWidget {
                                     children: [
                                       Text(
                                         'People Vaccinated: ',
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.bold),
+                                        style: titleStyle,
                                       ),
                                       Text(
                                         '${Util.toNumericFormat(vaccinatedList[index].data.last.peopleVaccinated)} - ${vaccinatedList[index].data.last.peopleVaccinatedPerHundred}%',
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.green),
+                                        style: valueStyle,
                                       ),
                                     ],
                                   ),
@@ -152,16 +117,11 @@ class VaccinationCountryRoute extends StatelessWidget {
                                     children: [
                                       Text(
                                         'Fully Vaccinated: ',
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.bold),
+                                        style: titleStyle,
                                       ),
                                       Text(
                                         '${Util.toNumericFormat(vaccinatedList[index].data.last.peopleFullyVaccinated)} - ${vaccinatedList[index].data.last.peopleFullyVaccinatedPerHundred}%',
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.green),
+                                        style: valueStyle,
                                       ),
                                     ],
                                   ),

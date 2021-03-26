@@ -40,17 +40,9 @@ class VaccinationCountryHistoryRoute extends StatelessWidget {
                         ],
                       ),
                     ),
-                    padding: EdgeInsets.only(bottom: 20),
                     child: Column(
                       children: [
-                        CustomBackButton(),
-                        Text(
-                          '${this.vaccinateDetail.location}',
-                          style: TextStyle(
-                              fontSize: 23,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
-                        ),
+                        CustomBackButton(this.vaccinateDetail.location),
                       ],
                     ),
                   ),

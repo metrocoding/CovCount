@@ -23,7 +23,7 @@ class AboutUsRoute extends StatelessWidget {
                   borderRadius: BorderRadius.circular(900),
                   child: Image(
                     image: AssetImage('assets/images/profile.jpeg'),
-                    width: MediaQuery.of(context).size.width / 3,
+                    width: MediaQuery.of(context).size.width / 4,
                   ),
                 ),
               ),

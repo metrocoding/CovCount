@@ -32,7 +32,7 @@ class VaccinationRoute extends StatelessWidget {
           padding: EdgeInsets.only(bottom: 30),
           decoration: BoxDecoration(color: MyColors.background),
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(20, 70, 20, 0),
+            padding: const EdgeInsets.fromLTRB(20, 50, 20, 90),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[

@@ -11,11 +11,11 @@ class StatisticRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextStyle lightTextStatistic = TextStyle(
-        fontSize: 14, fontWeight: FontWeight.bold, color: Colors.black54);
+        fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black54);
     TextStyle numeriStatistics = TextStyle(
-        fontSize: 14,
+        fontSize: 18,
         color: color != null ? color : Colors.pink.shade400,
-        fontWeight: FontWeight.bold);
+        fontWeight: FontWeight.w600);
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 5),

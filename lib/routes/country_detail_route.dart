@@ -15,7 +15,7 @@ class CountryDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     TextStyle headerBold = TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
     TextStyle subheaderBold =
-        TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
+        TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -28,63 +28,42 @@ class CountryDetail extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 250,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topRight,
-                        end: Alignment.bottomLeft,
-                        colors: [
-                          MyColors.lightPink,
-                          MyColors.hotPink,
-                        ],
-                      ),
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topRight,
+                      end: Alignment.bottomLeft,
+                      colors: [
+                        MyColors.lightPink,
+                        MyColors.hotPink,
+                      ],
                     ),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          CustomBackButton(),
-                          Padding(
-                              padding: const EdgeInsets.only(bottom: 20),
-                              child: Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      color: Colors.white),
-                                  child: Padding(
-                                      padding: const EdgeInsets.all(2),
-                                      child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                          child: Image(
-                                            image:
-                                                NetworkImage(this.country.flag),
-                                            width: 80,
-                                          ))))),
-                          Text(
-                            '${this.country.country}',
-                            style: TextStyle(
-                                fontSize: 23,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          )
-                        ])),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CustomBackButton(this.country.country),
+                    ],
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Population: ',
-                          style: headerBold,
-                        ),
-                        Text(
-                          '${this.country.population}',
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.pink.shade400,
-                              fontWeight: FontWeight.bold),
-                        )
-                      ]),
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Population: ',
+                        style: headerBold,
+                      ),
+                      Text(
+                        '${this.country.population}',
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.pink.shade400,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
@@ -125,7 +104,7 @@ class CountryDetail extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                    padding: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.symmetric(vertical: 20),
                     child: WhiteBox(children: [
                       BoxTitle(title: ' Total statistics'),
                       StatisticRow(

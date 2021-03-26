@@ -11,8 +11,14 @@ class VaccineList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var titleStyle = TextStyle(fontSize: 16, fontWeight: FontWeight.w600);
+    var valueStyle = TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w600,
+        color: MyColors.hotGreenBlue);
+
     return Container(
-        height: MediaQuery.of(context).size.height - 350,
+        height: MediaQuery.of(context).size.height - 295,
         child: MediaQuery.removePadding(
             context: context,
             removeTop: true,
@@ -35,105 +41,69 @@ class VaccineList extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                          child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 5, vertical: 7),
-                              child: Container(
-                                  decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.3),
-                                          spreadRadius: 1,
-                                          blurRadius: 2,
-                                          offset: Offset(0,
-                                              3), // changes position of shadow
-                                        )
-                                      ],
-                                      borderRadius: BorderRadius.circular(15),
-                                      color: Colors.white),
-                                  child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Column(children: [
-                                        Row(children: [
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                            child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(children: [
+                                  Row(children: [
+                                    Container(
+                                        height: 30,
+                                        width: 50,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                            image: DecorationImage(
+                                                image: AssetImage(
+                                                    'assets/images/syringe.png')))),
+                                    Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 10),
+                                        child: Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width -
+                                                130,
+                                            child: Text(
+                                              vaccines[index].sponsors[0],
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 1,
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w700),
+                                              softWrap: true,
+                                            )))
+                                  ]),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 10),
+                                    child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text('Candidate: ',
+                                              style: titleStyle),
                                           Container(
-                                              height: 30,
-                                              width: 50,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  image: DecorationImage(
-                                                      image: AssetImage(
-                                                          'assets/images/syringe.png')))),
-                                          Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 10),
-                                              child: Container(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width -
-                                                      130,
-                                                  child: Text(
-                                                    vaccines[index].sponsors[0],
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    maxLines: 1,
-                                                    style: TextStyle(
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w700),
-                                                    softWrap: true,
-                                                  )))
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width -
+                                                150,
+                                            child: Text(
+                                                '${vaccines[index].candidate}',
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: valueStyle),
+                                          ),
                                         ]),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 10),
-                                          child: Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text('Candidate: ',
-                                                    style: TextStyle(
-                                                        fontSize: 14,
-                                                        fontWeight:
-                                                            FontWeight.w500)),
-                                                Container(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width -
-                                                      150,
-                                                  child: Text(
-                                                      '${vaccines[index].candidate}',
-                                                      maxLines: 1,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      style: TextStyle(
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          color: MyColors
-                                                              .hotGreenBlue)),
-                                                ),
-                                              ]),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(bottom: 10),
-                                          child: Row(children: [
-                                            Text('Trial phase: ',
-                                                style: TextStyle(
-                                                    fontSize: 14,
-                                                    fontWeight:
-                                                        FontWeight.w500)),
-                                            Text(
-                                                '${vaccines[index].trialPhase}',
-                                                style: TextStyle(
-                                                    fontSize: 14,
-                                                    fontWeight: FontWeight.w700,
-                                                    color:
-                                                        MyColors.hotGreenBlue)),
-                                          ]),
-                                        )
-                                      ])))))),
+                                  ),
+                                  Row(children: [
+                                    Text('Trial phase: ', style: titleStyle),
+                                    Text('${vaccines[index].trialPhase}',
+                                        style: valueStyle),
+                                  ])
+                                ])),
+                          ))),
                   itemCount: this.vaccines.length),
             )));
   }

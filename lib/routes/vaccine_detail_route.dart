@@ -26,7 +26,6 @@ class VaccineDetail extends StatelessWidget {
               children: <Widget>[
                 Container(
                     width: MediaQuery.of(context).size.width,
-                    height: 250,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.topRight,
@@ -40,16 +39,7 @@ class VaccineDetail extends StatelessWidget {
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          CustomBackButton(),
-                          Padding(
-                              padding: const EdgeInsets.only(bottom: 20),
-                              child: Padding(
-                                  padding: const EdgeInsets.all(5),
-                                  child: Image(
-                                    image:
-                                        AssetImage('assets/images/syringe.png'),
-                                    width: 80,
-                                  )))
+                          CustomBackButton('Vaccine Detail'),
                         ])),
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Padding(
@@ -65,7 +55,7 @@ class VaccineDetail extends StatelessWidget {
                       '${this.vaccine.mechanism}',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 20,
                           color: MyColors.hotGreenBlue,
                           fontWeight: FontWeight.bold),
                     ),
@@ -83,7 +73,7 @@ class VaccineDetail extends StatelessWidget {
                           ),
                           Text(' Candidate',
                               style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold))
+                                  fontSize: 20, fontWeight: FontWeight.bold))
                         ],
                       ),
                       Padding(
@@ -101,7 +91,7 @@ class VaccineDetail extends StatelessWidget {
                             ),
                             Text(' Sponsors',
                                 style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold))
+                                    fontSize: 20, fontWeight: FontWeight.bold))
                           ],
                         ),
                       ),
@@ -119,7 +109,7 @@ class VaccineDetail extends StatelessWidget {
                             ),
                             Text(' Institutions',
                                 style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold))
+                                    fontSize: 20, fontWeight: FontWeight.bold))
                           ],
                         ),
                       ),
@@ -138,7 +128,7 @@ class VaccineDetail extends StatelessWidget {
                             ),
                             Text(' Trial Phase',
                                 style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold))
+                                    fontSize: 20, fontWeight: FontWeight.bold))
                           ],
                         ),
                       ),
@@ -162,7 +152,7 @@ class VaccineDetail extends StatelessWidget {
                           ),
                           Text(' Details',
                               style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold))
+                                  fontSize: 20, fontWeight: FontWeight.bold))
                         ],
                       ),
                     ),
@@ -195,7 +185,7 @@ class VaccineDetail extends StatelessWidget {
                           maxLines: 1000,
                           textAlign: TextAlign.left,
                           style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 18,
                               fontWeight: FontWeight.bold,
                               color: Colors.grey.shade600),
                         ),

@@ -9,10 +9,10 @@ class BoxTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextStyle subheaderBold =
-        TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
+        TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
 
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.only(bottom: 0),
       child: Column(
         children: [
           Row(

@@ -25,32 +25,24 @@ class TherapeuticDetail extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 250,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topRight,
-                        end: Alignment.bottomLeft,
-                        colors: [
-                          MyColors.lightBlue,
-                          MyColors.hotBlue,
-                        ],
-                      ),
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topRight,
+                      end: Alignment.bottomLeft,
+                      colors: [
+                        MyColors.lightBlue,
+                        MyColors.hotBlue,
+                      ],
                     ),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          CustomBackButton(),
-                          Padding(
-                              padding: const EdgeInsets.only(bottom: 20),
-                              child: Padding(
-                                  padding: const EdgeInsets.all(5),
-                                  child: Image(
-                                    image: AssetImage(
-                                        'assets/images/medicine.png'),
-                                    width: 80,
-                                  )))
-                        ])),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CustomBackButton('Medication Detail'),
+                    ],
+                  ),
+                ),
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Padding(
                     padding: const EdgeInsets.only(top: 20),
@@ -65,7 +57,7 @@ class TherapeuticDetail extends StatelessWidget {
                       '${this.therapeutic.medicationClass}',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 20,
                           color: MyColors.hotBlue,
                           fontWeight: FontWeight.bold),
                     ),
@@ -83,7 +75,7 @@ class TherapeuticDetail extends StatelessWidget {
                           ),
                           Text(' Trade Name',
                               style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold))
+                                  fontSize: 20, fontWeight: FontWeight.bold))
                         ],
                       ),
                       Padding(
@@ -101,7 +93,7 @@ class TherapeuticDetail extends StatelessWidget {
                             ),
                             Text(' Sponsors',
                                 style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold))
+                                    fontSize: 20, fontWeight: FontWeight.bold))
                           ],
                         ),
                       ),
@@ -120,7 +112,7 @@ class TherapeuticDetail extends StatelessWidget {
                             ),
                             Text(' Developer Researcher',
                                 style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold))
+                                    fontSize: 20, fontWeight: FontWeight.bold))
                           ],
                         ),
                       ),
@@ -139,7 +131,7 @@ class TherapeuticDetail extends StatelessWidget {
                             ),
                             Text(' Trial Phase',
                                 style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold))
+                                    fontSize: 20, fontWeight: FontWeight.bold))
                           ],
                         ),
                       ),
@@ -158,7 +150,7 @@ class TherapeuticDetail extends StatelessWidget {
                             ),
                             Text(' Last Update',
                                 style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold))
+                                    fontSize: 20, fontWeight: FontWeight.bold))
                           ],
                         ),
                       ),
@@ -182,7 +174,7 @@ class TherapeuticDetail extends StatelessWidget {
                           ),
                           Text(' Details',
                               style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold))
+                                  fontSize: 20, fontWeight: FontWeight.bold))
                         ],
                       ),
                     ),
@@ -216,7 +208,7 @@ class TherapeuticDetail extends StatelessWidget {
                           maxLines: 1000,
                           textAlign: TextAlign.left,
                           style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 18,
                               fontWeight: FontWeight.bold,
                               color: Colors.grey.shade600),
                         ),

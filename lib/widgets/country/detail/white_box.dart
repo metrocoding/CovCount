@@ -7,18 +7,16 @@ class WhiteBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        width: MediaQuery.of(context).size.width - 40,
-        decoration: BoxDecoration(boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.3),
-            spreadRadius: 1,
-            blurRadius: 2,
-            offset: Offset(0, 3), // changes position of shadow
-          )
-        ], color: Colors.white, borderRadius: BorderRadius.circular(15)),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
         child: Padding(
             padding: const EdgeInsets.all(10),
-            child: Column(children: children)));
+            child: Column(children: children)),
+      ),
+    );
   }
 }
