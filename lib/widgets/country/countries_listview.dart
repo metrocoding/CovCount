@@ -1,3 +1,4 @@
+import 'package:covid_count/config/config.dart';
 import 'package:covid_count/models/country.dart';
 import 'package:covid_count/routes/country_detail_route.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,7 @@ class CountriesListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var titleStyle = TextStyle(fontSize: 16, fontWeight: FontWeight.w600);
+    var titleStyle = Config.titleStyle;
     var valueStyle = TextStyle(
         fontSize: 16, fontWeight: FontWeight.w600, color: Colors.pink.shade400);
 

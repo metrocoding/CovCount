@@ -11,8 +11,11 @@ void main() {
     ],
   );
 
-  runApp(new MaterialApp(
-    theme: ThemeData(fontFamily: 'SourceSansPro'),
-    home: HomePage(),
-  ));
+  runApp(
+    new MaterialApp(
+      title: 'CovCount',
+      theme: ThemeData(fontFamily: 'SourceSansPro'),
+      home: HomePage(),
+    ),
+  );
 }

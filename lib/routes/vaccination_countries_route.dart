@@ -1,3 +1,4 @@
+import 'package:covid_count/config/config.dart';
 import 'package:covid_count/models/vaccination.dart';
 import 'package:covid_count/resource/colors.dart';
 import 'package:covid_count/routes/vaccination_country_history.dart';
@@ -14,7 +15,7 @@ class VaccinationCountryRoute extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var titleStyle = TextStyle(fontSize: 16, fontWeight: FontWeight.w600);
+    var titleStyle = Config.titleStyle;
     var valueStyle = TextStyle(
         fontSize: 16, fontWeight: FontWeight.w600, color: Colors.green);
 

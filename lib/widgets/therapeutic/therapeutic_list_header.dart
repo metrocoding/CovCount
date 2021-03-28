@@ -1,3 +1,4 @@
+import 'package:covid_count/config/config.dart';
 import 'package:covid_count/resource/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -34,10 +35,7 @@ class TherapeuticListHeader extends StatelessWidget {
                     children: [
                       Text(
                         'Therapeutics Data',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 25),
+                        style: Config.headerTitle,
                       ),
                       Image(
                         image: AssetImage("assets/images/medicine.png"),
