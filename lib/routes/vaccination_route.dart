@@ -6,16 +6,23 @@ import 'package:covid_count/widgets/linear_chart.dart';
 import 'package:covid_count/widgets/vaccination/world_vaccination_header.dart';
 import 'package:flutter/material.dart';
 
-class VaccinationRoute extends StatelessWidget {
+class VaccinationRoute extends StatefulWidget {
   final List<Vaccination> usGrouped;
   final List<Vaccination> vaccinatedList;
 
   const VaccinationRoute({Key key, this.usGrouped, this.vaccinatedList})
       : super(key: key);
 
+  @override
+  _VaccinationRouteState createState() => _VaccinationRouteState();
+}
+
+class _VaccinationRouteState extends State<VaccinationRoute> {
+  List<String> _locationNames = [];
+
   int get getVaccinationCount {
     int totalCount = 0;
-    vaccinatedList.forEach((vaccination) {
+    widget.vaccinatedList.forEach((vaccination) {
       if (vaccination.location == 'World')
         totalCount += int.parse(
             vaccination.data[vaccination.data.length - 1].totalVaccinations);
@@ -46,7 +53,7 @@ class VaccinationRoute extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) => VaccinationCountryRoute(
-                            vaccinatedList: this.vaccinatedList,
+                            vaccinatedList: this.widget.vaccinatedList,
                             title: 'Global Vaccination List',
                           ),
                         ),
@@ -87,7 +94,7 @@ class VaccinationRoute extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) => VaccinationCountryRoute(
-                          vaccinatedList: this.usGrouped,
+                          vaccinatedList: this.widget.usGrouped,
                           title: 'US Vaccination List',
                         ),
                       ),
@@ -121,8 +128,8 @@ class VaccinationRoute extends StatelessWidget {
                 ),
                 LinearChart(
                   title: 'Vaccination reports (million dose)',
-                  vaccinatedList:
-                      VaccinationChartData.makeList(this.vaccinatedList),
+                  vaccinatedList: getTopTenList(),
+                  locationNames: _locationNames,
                 ),
               ],
             ),
@@ -130,5 +137,56 @@ class VaccinationRoute extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  List<List<VaccinationChartData>> getTopTenList({isForPopulation = false}) {
+    List<List<VaccinationChartData>> vaccinationDataList = [];
+    List<String> locs = [];
+
+    var newList = [
+      ...this.widget.vaccinatedList.where((el) => el.iso.length == 3)
+    ];
+
+    if (isForPopulation)
+      newList.sort((a, b) =>
+          double.parse(b.data.last.totalVaccinationsPerHundred).compareTo(
+              double.parse(a.data.last.totalVaccinationsPerHundred)));
+    else
+      newList.sort((a, b) => int.parse(b.data.last.totalVaccinations)
+          .compareTo(int.parse(a.data.last.totalVaccinations)));
+
+    newList = newList.take(10).toList();
+
+    List<String> dates = [];
+    newList.forEach((country) {
+      country.data.forEach((data) {
+        if (!dates.contains(data.date)) dates.add(data.date);
+      });
+    });
+
+    newList.forEach((country) {
+      dates.forEach((date) {
+        if (!country.data.any((data) => data.date == date)) {
+          country.data.add(VaccineData(date, '0', '0', '0', '0', '0', '0'));
+        }
+      });
+      country.data.sort(
+          (a, b) => DateTime.parse(a.date).compareTo(DateTime.parse(b.date)));
+    });
+
+    newList.forEach((element) {
+      if (isForPopulation)
+        vaccinationDataList
+            .add(VaccinationChartData.makePercentageVaccine(element));
+      else
+        vaccinationDataList.add(VaccinationChartData.makeListVaccine(element));
+      locs.add(element.location);
+    });
+
+    setState(() {
+      _locationNames = locs;
+    });
+
+    return vaccinationDataList;
   }
 }

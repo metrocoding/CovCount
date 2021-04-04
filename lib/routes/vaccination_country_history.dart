@@ -51,8 +51,10 @@ class VaccinationCountryHistoryRoute extends StatelessWidget {
                   ),
                   LinearChart(
                     title: 'Vaccination reports (million dose)',
-                    vaccinatedList: VaccinationChartData.makeListVaccine(
-                        this.vaccinateDetail),
+                    vaccinatedList: [
+                      VaccinationChartData.makeListVaccine(this.vaccinateDetail)
+                    ],
+                    locationNames: [vaccinateDetail.location],
                   ),
                   SizedBox(
                     height: 20,
