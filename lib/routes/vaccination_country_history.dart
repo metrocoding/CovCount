@@ -22,73 +22,79 @@ class VaccinationCountryHistoryRoute extends StatelessWidget {
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(color: MyColors.background),
         child: SingleChildScrollView(
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            alignment: Alignment.center,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 50),
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topRight,
-                        end: Alignment.bottomLeft,
-                        colors: [
-                          MyColors.lightGreen,
-                          MyColors.hotGreen,
+          child: GestureDetector(
+            onPanUpdate: (details) {
+              if (details.delta.dx > 10) Navigator.of(context).pop();
+            },
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              alignment: Alignment.center,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 50),
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topRight,
+                          end: Alignment.bottomLeft,
+                          colors: [
+                            MyColors.lightGreen,
+                            MyColors.hotGreen,
+                          ],
+                        ),
+                      ),
+                      child: Column(
+                        children: [
+                          CustomBackButton(this.vaccinateDetail.location),
                         ],
                       ),
                     ),
-                    child: Column(
+                    SizedBox(
+                      height: 20,
+                    ),
+                    LinearChart(
+                      title: 'Vaccination reports (million dose)',
+                      vaccinatedList: [
+                        VaccinationChartData.makeListVaccine(
+                            this.vaccinateDetail)
+                      ],
+                      locationNames: [vaccinateDetail.location],
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    WhiteBox(
                       children: [
-                        CustomBackButton(this.vaccinateDetail.location),
+                        BoxTitle(title: ' Latest Statistics'),
+                        StatisticRow(
+                          text: 'Fully Vaccinated: ',
+                          color: MyColors.hotGreen,
+                          value:
+                              '${Util.toNumericFormat(this.vaccinateDetail.data.last.peopleFullyVaccinated)} - ${this.vaccinateDetail.data.last.peopleFullyVaccinatedPerHundred}%',
+                        ),
+                        StatisticRow(
+                          text: 'Vaccinated: ',
+                          color: MyColors.hotGreen,
+                          value:
+                              '${Util.toNumericFormat(this.vaccinateDetail.data.last.peopleVaccinated)} - ${this.vaccinateDetail.data.last.peopleVaccinatedPerHundred}%',
+                        ),
+                        StatisticRow(
+                          text: 'Total Vaccinated: ',
+                          color: MyColors.hotGreen,
+                          value:
+                              '${Util.toNumericFormat(this.vaccinateDetail.data.last.totalVaccinations)} - ${this.vaccinateDetail.data.last.totalVaccinationsPerHundred}%',
+                        ),
+                        StatisticRow(
+                          text: 'Total Distribution: ',
+                          color: MyColors.hotGreen,
+                          value:
+                              '${Util.toNumericFormat(this.vaccinateDetail.data.last.totalDistribution)} - ${this.vaccinateDetail.data.last.distributionPercentage}%',
+                        ),
                       ],
                     ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  LinearChart(
-                    title: 'Vaccination reports (million dose)',
-                    vaccinatedList: [
-                      VaccinationChartData.makeListVaccine(this.vaccinateDetail)
-                    ],
-                    locationNames: [vaccinateDetail.location],
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  WhiteBox(
-                    children: [
-                      BoxTitle(title: ' Latest Statistics'),
-                      StatisticRow(
-                        text: 'Fully Vaccinated: ',
-                        color: MyColors.hotGreen,
-                        value:
-                            '${Util.toNumericFormat(this.vaccinateDetail.data.last.peopleFullyVaccinated)} - ${this.vaccinateDetail.data.last.peopleFullyVaccinatedPerHundred}%',
-                      ),
-                      StatisticRow(
-                        text: 'Vaccinated: ',
-                        color: MyColors.hotGreen,
-                        value:
-                            '${Util.toNumericFormat(this.vaccinateDetail.data.last.peopleVaccinated)} - ${this.vaccinateDetail.data.last.peopleVaccinatedPerHundred}%',
-                      ),
-                      StatisticRow(
-                        text: 'Total Vaccinated: ',
-                        color: MyColors.hotGreen,
-                        value:
-                            '${Util.toNumericFormat(this.vaccinateDetail.data.last.totalVaccinations)} - ${this.vaccinateDetail.data.last.totalVaccinationsPerHundred}%',
-                      ),
-                      StatisticRow(
-                        text: 'Total Distribution: ',
-                        color: MyColors.hotGreen,
-                        value:
-                            '${Util.toNumericFormat(this.vaccinateDetail.data.last.totalDistribution)} - ${this.vaccinateDetail.data.last.distributionPercentage}%',
-                      ),
-                    ],
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

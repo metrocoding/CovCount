@@ -16,153 +16,165 @@ class VaccineDetail extends StatelessWidget {
 
     return Scaffold(
       body: SingleChildScrollView(
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(color: MyColors.background),
-          alignment: Alignment.center,
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(0, 0, 0, 50),
-            child: Column(
-              children: <Widget>[
-                Container(
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topRight,
-                        end: Alignment.bottomLeft,
-                        colors: [
-                          MyColors.lightGreenBlue,
-                          MyColors.hotGreenBlue,
-                        ],
+        child: GestureDetector(
+          onPanUpdate: (details) {
+            if (details.delta.dx > 10) Navigator.of(context).pop();
+          },
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(color: MyColors.background),
+            alignment: Alignment.center,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 50),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topRight,
+                          end: Alignment.bottomLeft,
+                          colors: [
+                            MyColors.lightGreenBlue,
+                            MyColors.hotGreenBlue,
+                          ],
+                        ),
                       ),
-                    ),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          CustomBackButton('Vaccine Detail'),
-                        ])),
-                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            CustomBackButton('Vaccine Detail'),
+                          ])),
+                  Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20),
+                          child: Text(
+                            'Mechanism',
+                            style: headerBold,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Text(
+                            '${this.vaccine.mechanism}',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: MyColors.hotGreenBlue,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        )
+                      ]),
                   Padding(
-                    padding: const EdgeInsets.only(top: 20),
-                    child: Text(
-                      'Mechanism',
-                      style: headerBold,
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    child: WhiteBox(
+                      children: [
+                        Row(
+                          children: [
+                            FaIcon(
+                              FontAwesomeIcons.award,
+                              size: 20,
+                            ),
+                            Text(' Candidate',
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold))
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 5),
+                          child: _getStringColumn(
+                              [this.vaccine.candidate], context),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Row(
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.vials,
+                                size: 20,
+                              ),
+                              Text(' Sponsors',
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold))
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 5),
+                          child:
+                              _getStringColumn(this.vaccine.sponsors, context),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Row(
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.flask,
+                                size: 20,
+                              ),
+                              Text(' Institutions',
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold))
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 5),
+                          child: _getStringColumn(
+                              this.vaccine.institutions, context),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Row(
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.vial,
+                                size: 20,
+                              ),
+                              Text(' Trial Phase',
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold))
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 5),
+                          child: _getStringColumn(
+                              [this.vaccine.trialPhase], context),
+                        ),
+                      ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Text(
-                      '${this.vaccine.mechanism}',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: MyColors.hotGreenBlue,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  )
-                ]),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: WhiteBox(
+                  WhiteBox(
                     children: [
-                      Row(
-                        children: [
-                          FaIcon(
-                            FontAwesomeIcons.award,
-                            size: 20,
-                          ),
-                          Text(' Candidate',
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold))
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: Row(
+                          children: [
+                            FaIcon(
+                              FontAwesomeIcons.bookReader,
+                              size: 20,
+                            ),
+                            Text(' Details',
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold))
+                          ],
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 5),
                         child:
-                            _getStringColumn([this.vaccine.candidate], context),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Row(
-                          children: [
-                            FaIcon(
-                              FontAwesomeIcons.vials,
-                              size: 20,
-                            ),
-                            Text(' Sponsors',
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold))
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 5),
-                        child: _getStringColumn(this.vaccine.sponsors, context),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Row(
-                          children: [
-                            FaIcon(
-                              FontAwesomeIcons.flask,
-                              size: 20,
-                            ),
-                            Text(' Institutions',
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold))
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 5),
-                        child: _getStringColumn(
-                            this.vaccine.institutions, context),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Row(
-                          children: [
-                            FaIcon(
-                              FontAwesomeIcons.vial,
-                              size: 20,
-                            ),
-                            Text(' Trial Phase',
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold))
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 5),
-                        child: _getStringColumn(
-                            [this.vaccine.trialPhase], context),
-                      ),
+                            _getStringColumn([this.vaccine.details], context),
+                      )
                     ],
-                  ),
-                ),
-                WhiteBox(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: Row(
-                        children: [
-                          FaIcon(
-                            FontAwesomeIcons.bookReader,
-                            size: 20,
-                          ),
-                          Text(' Details',
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold))
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 5),
-                      child: _getStringColumn([this.vaccine.details], context),
-                    )
-                  ],
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           ),
         ),

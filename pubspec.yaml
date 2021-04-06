@@ -46,6 +46,7 @@ flutter:
     - assets/images/worldwide.png
     - assets/images/united-states.png
     - assets/images/injection.png
+    - assets/images/loading.png
 
   fonts:
     - family: SourceSansPro

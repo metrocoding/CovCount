@@ -55,11 +55,17 @@ class CountriesListView extends StatelessWidget {
                                     width: 50,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(5),
-                                      image: DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image:
-                                            NetworkImage(countries[index].flag),
-                                      ),
+                                    ),
+                                    child: FadeInImage(
+                                      placeholder: AssetImage(
+                                          'assets/images/loading.png'),
+                                      image:
+                                          NetworkImage(countries[index].flag),
+                                      fit: BoxFit.contain,
+                                      fadeInDuration:
+                                          Duration(milliseconds: 500),
+                                      fadeInCurve:
+                                          Curves.fastLinearToSlowEaseIn,
                                     ),
                                   ),
                                   Padding(

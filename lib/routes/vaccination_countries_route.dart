@@ -21,112 +21,117 @@ class VaccinationCountryRoute extends StatelessWidget {
 
     return Scaffold(
       body: SingleChildScrollView(
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          decoration: BoxDecoration(color: MyColors.background),
-          alignment: Alignment.center,
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-            child: Column(
-              children: <Widget>[
-                Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topRight,
-                      end: Alignment.bottomLeft,
-                      colors: [
-                        MyColors.lightGreen,
-                        MyColors.hotGreen,
+        child: GestureDetector(
+          onPanUpdate: (details) {
+            if (details.delta.dx > 10) Navigator.of(context).pop();
+          },
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            decoration: BoxDecoration(color: MyColors.background),
+            alignment: Alignment.center,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        colors: [
+                          MyColors.lightGreen,
+                          MyColors.hotGreen,
+                        ],
+                      ),
+                    ),
+                    child: Column(
+                      children: [
+                        CustomBackButton(title),
                       ],
                     ),
                   ),
-                  child: Column(
-                    children: [
-                      CustomBackButton(title),
-                    ],
-                  ),
-                ),
-                Container(
-                  height: MediaQuery.of(context).size.height - 115,
-                  child: ListView.builder(
-                    padding: EdgeInsets.symmetric(vertical: 20),
-                    physics: AlwaysScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: vaccinatedList.length,
-                    itemBuilder: (context, index) => Material(
-                      borderRadius: BorderRadius.circular(5),
-                      color: Colors.transparent,
-                      child: InkWell(
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                VaccinationCountryHistoryRoute(
-                              vaccinateDetail: this.vaccinatedList[index],
+                  Container(
+                    height: MediaQuery.of(context).size.height - 115,
+                    child: ListView.builder(
+                      padding: EdgeInsets.symmetric(vertical: 20),
+                      physics: AlwaysScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: vaccinatedList.length,
+                      itemBuilder: (context, index) => Material(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.transparent,
+                        child: InkWell(
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  VaccinationCountryHistoryRoute(
+                                vaccinateDetail: this.vaccinatedList[index],
+                              ),
                             ),
                           ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 10,
-                          ),
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15.0),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                    vaccinatedList[index].location,
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 5),
-                                    child: Row(
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      vaccinatedList[index].location,
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 5),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            'Total: ',
+                                            style: titleStyle,
+                                          ),
+                                          Text(
+                                            '${Util.toNumericFormat(vaccinatedList[index].data.last.totalVaccinations)} - ${vaccinatedList[index].data.last.totalVaccinationsPerHundred}%',
+                                            style: valueStyle,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Row(
                                       children: [
                                         Text(
-                                          'Total: ',
+                                          'People Vaccinated: ',
                                           style: titleStyle,
                                         ),
                                         Text(
-                                          '${Util.toNumericFormat(vaccinatedList[index].data.last.totalVaccinations)} - ${vaccinatedList[index].data.last.totalVaccinationsPerHundred}%',
+                                          '${Util.toNumericFormat(vaccinatedList[index].data.last.peopleVaccinated)} - ${vaccinatedList[index].data.last.peopleVaccinatedPerHundred}%',
                                           style: valueStyle,
                                         ),
                                       ],
                                     ),
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        'People Vaccinated: ',
-                                        style: titleStyle,
-                                      ),
-                                      Text(
-                                        '${Util.toNumericFormat(vaccinatedList[index].data.last.peopleVaccinated)} - ${vaccinatedList[index].data.last.peopleVaccinatedPerHundred}%',
-                                        style: valueStyle,
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        'Fully Vaccinated: ',
-                                        style: titleStyle,
-                                      ),
-                                      Text(
-                                        '${Util.toNumericFormat(vaccinatedList[index].data.last.peopleFullyVaccinated)} - ${vaccinatedList[index].data.last.peopleFullyVaccinatedPerHundred}%',
-                                        style: valueStyle,
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                    Row(
+                                      children: [
+                                        Text(
+                                          'Fully Vaccinated: ',
+                                          style: titleStyle,
+                                        ),
+                                        Text(
+                                          '${Util.toNumericFormat(vaccinatedList[index].data.last.peopleFullyVaccinated)} - ${vaccinatedList[index].data.last.peopleFullyVaccinatedPerHundred}%',
+                                          style: valueStyle,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -134,8 +139,8 @@ class VaccinationCountryRoute extends StatelessWidget {
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
